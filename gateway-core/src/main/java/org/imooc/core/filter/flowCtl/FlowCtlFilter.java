@@ -15,7 +15,7 @@ import org.imooc.core.filter.FilterAspect;
 @Slf4j
 @FilterAspect(
         id=FilterConst.FLOW_CTL_FILTER_ID,
-        name = FilterConst.FLOW_CTL_FILTER_NAME
+        name = FilterConst.FLOW_CTL_FILTER_NAME,
         order = FilterConst.FLOW_CTL_FILTER_ORDER
 )
 public class FlowCtlFilter implements Filter {
