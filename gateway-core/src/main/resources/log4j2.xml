@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO" schema="Log4J-V2.0.xsd" monitorInterval="600">
+
+    <!--日志级别：TRACE < DEBUG < INFO < WARN < ERROR < FATAL-->
+    <Properties>
+        <!-- 	配置日志文件输出目录,此处为项目根目录下的logs文件夹 -->
+        <Property name="LOG_HOME">logs</Property>
+        <!--https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout -->
+        <property name="patternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%20.20t] %40.40c{1.} : %m%n</property>
+        <property name="accessPatternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} %m %n</property>
+    </Properties>
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${patternLayout}"/>
+        </Console>
+
+        <RollingRandomAccessFile name="RandomAccessFile" fileName="${LOG_HOME}/gateway-core.log" filePattern="${LOG_HOME}/gateway-core-%d{yyyy-MM-dd}-%i.log" >
+            <PatternLayout pattern="${patternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="AccessLogFile" fileName="${LOG_HOME}/access.log" filePattern="${LOG_HOME}/access-%d{yyyy-MM-dd}-%i.log" >
+            <PatternLayout pattern="${accessPatternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+        <Async name="Async" shutdownTimeout="10000">
+            <Appender-Ref ref="CONSOLE"/>
+            <Appender-Ref ref="RandomAccessFile"/>
+            <Appender-Ref ref="AccessLogFile"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.imooc.gateway.core.*" level="error" includeLocation="true">
+            <AppenderRef ref="RandomAccessFile"/>
+        </Logger>
+
+        <Logger name="accessLog" level="error" includeLocation="false">
+            <AppenderRef ref="AccessLogFile"/>
+        </Logger>
+
+        <Root level="error">
+            <Appender-Ref ref="CONSOLE"/>
+            <Appender-Ref ref="accessLog"/>
+            <Appender-Ref ref="RandomAccessFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

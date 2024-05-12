@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-cloud-gateway
+
+  cloud:
+    nacos:
+      discovery:
+        group: dev
+        server-addr: 127.0.0.1
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user_route
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+server:
+  port: 9090
+
+
