@@ -1,17 +1,29 @@
-# Getting Started
+# API网关
 
-### Reference Documentation
-For further reference, please consider the following sections:
+#### 生产级别的高性能、高并发的入口网关系统
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.13/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.13/maven-plugin/reference/html/#build-image)
-* [Nacos Service Discovery](https://spring-cloud-alibaba-group.github.io/github-pages/hoxton/en-us/index.html#_spring_cloud_alibaba_nacos_discovery)
-* [Gateway](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/)
+（1）轻量级、原生化、高性能、异步化、高缓冲的网关架构设计
 
-### Guides
-The following guides illustrate how to use some features concretely:
+（2）基于Netty实现一套企业级的高并发网关网络通信架构
 
-* [Nacos Service Discovery Example](https://github.com/alibaba/spring-cloud-alibaba/blob/master/spring-cloud-alibaba-examples/nacos-example/nacos-discovery-example/readme.md)
-* [Using Spring Cloud Gateway](https://github.com/spring-cloud-samples/spring-cloud-gateway-sample)
+（3）基于disruptor和MPMC实现一套高性能的网关异步队列架构
 
+（4）基于责任链+抽象模板+工厂等设计模式实现网关的核心代码
+
+（5）基于ETCD去搭建分布式网关集群的注册中心架构
+
+（6）实现一套高并发网关的负载均衡架构和预热架构
+
+（7）实现一套metric后置过滤器插件体系架构
+
+（8）网关高可用、灰度发布以及控制台架构设计
+
+#### 项目难点
+
+- 架构设计：入口网关的功能点、技术选型、高性能设计点
+
+- 开源黑科技：高性能队列Disruptor、MPMC
+
+- 设计模式：基于责任链模式 + 抽象模板方法 + 工厂模式实现过滤器功能
+
+- 集群压测：生产环境阿里云SLB负载均衡四层七层协议集群十万并发压测与调优
